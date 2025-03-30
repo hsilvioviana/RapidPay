@@ -4,9 +4,9 @@ using RapidPay.Services.Interfaces;
 namespace RapidPay.Api.Controllers.v1
 {
     [ApiController]
-    [Route("v{version:apiVersion}/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1.0")]
-    public class CardController : ControllerBase
+    public class CardController : BaseController
     {
         private readonly ICardService _service;
 

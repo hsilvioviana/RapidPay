@@ -4,7 +4,7 @@ services:
     build:
       dockerfile: Dockerfile
     ports:
-      - "7320:80"
+      - "7320:8080"
     depends_on:
       - database
 

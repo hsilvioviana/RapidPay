@@ -4,7 +4,7 @@ using RapidPay.Services.Interfaces;
 
 namespace RapidPay.Services.Services
 {
-    public class CardService : BaseService, ICardService
+    public class CardService : ICardService
     {
         private readonly ICardRepository _repository;
         private readonly IMapper _mapper;

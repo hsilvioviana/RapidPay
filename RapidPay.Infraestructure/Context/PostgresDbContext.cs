@@ -11,7 +11,7 @@ namespace RapidPay.Infraestructure.Context
             
         }
 
-        public DbSet<CardModel> Card => Set<CardModel>();
+        public DbSet<UserModel> User => Set<UserModel>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

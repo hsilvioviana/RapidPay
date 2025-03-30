@@ -20,7 +20,7 @@ namespace RapidPay.Infraestructure.Repositories
             return await DbSet.AsNoTracking().ToListAsync();
         }
 
-        public virtual async Task<TModel?> Find(Guid id)
+        public virtual async Task<TModel> Find(Guid id)
         {
             return await DbSet.FindAsync(id);        
         }

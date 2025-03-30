@@ -13,4 +13,4 @@ COPY --from=build /app/out .
 RUN apt-get update && apt-get install -y coreutils
 CMD ["sh", "-c", "dotnet RapidPay.Api.dll"]
 
-EXPOSE 80
+EXPOSE 8080

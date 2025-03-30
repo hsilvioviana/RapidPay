@@ -1,11 +1,11 @@
-using FluentValidation;
+﻿using FluentValidation;
 using RapidPay.Application.CustomExceptions;
 
-namespace RapidPay.Services.Services
+namespace RapidPay.Application.Validations
 {
-    public class BaseService
+    public static class ValidationHelper
     {
-        public void Validate<TV, TM>(TV validation, TM model) where TV :  AbstractValidator<TM>
+        public static void Validate<TV, TM>(TV validation, TM model) where TV : AbstractValidator<TM>
         {
             var result = validation.Validate(model);
 
@@ -15,7 +15,7 @@ namespace RapidPay.Services.Services
             }
         }
 
-        public void ThrowErrorWhen<T, E>(T value1, string TypeOfComparison, T value2, E exception) where E : Exception
+        public static void ThrowErrorWhen<T, E>(T value1, string TypeOfComparison, T value2, E exception) where E : Exception
         {
             var throwError = false;
 

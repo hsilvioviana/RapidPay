@@ -11,6 +11,13 @@ namespace RapidPay.Application.AutoMapper
             #region Card
             CreateMap<CardViewModel, CardModel>();
             #endregion
+
+            #region User
+            CreateMap<UserViewModel, UserModel>();
+            CreateMap<SignUpViewModel, UserModel>();
+            CreateMap<LoginViewModel, UserModel>();
+            CreateMap<UpdateUserViewModel, UserModel>();
+            #endregion
         }
     }
 }

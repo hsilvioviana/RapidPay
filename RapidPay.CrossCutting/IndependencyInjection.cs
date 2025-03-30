@@ -15,10 +15,12 @@ namespace RapidPay.CrossCutting
         {
             #region Repositories
             services.AddScoped<ICardRepository, CardRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             #endregion
 
             #region Services
             services.AddScoped<ICardService, CardService>();
+            services.AddScoped<IUserService, UserService>();
             #endregion
 
             #region DbContexts
