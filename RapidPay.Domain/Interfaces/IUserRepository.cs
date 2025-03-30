@@ -4,7 +4,7 @@ namespace RapidPay.Domain.Interfaces
 {
     public interface IUserRepository : IBaseRepository<UserModel>
     {
-        Task<UserModel> SearchByUsername(string username);
-        Task<UserModel> SearchByEmail(string email);
+        Task<UserModel> SearchByUsernameAsync(string username);
+        Task<UserModel> SearchByEmailAsync(string email);
     }
 }

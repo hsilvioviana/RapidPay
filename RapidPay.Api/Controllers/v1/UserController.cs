@@ -40,7 +40,7 @@ namespace RapidPay.Api.Controllers
         {
             ValidationHelper.Validate(new SignUpValidation(), viewModel);
 
-            return await _service.SignUp(viewModel);
+            return await _service.SignUpAsync(viewModel);
         }
 
         // POST api/users/login
@@ -64,7 +64,7 @@ namespace RapidPay.Api.Controllers
         {
             ValidationHelper.Validate(new LoginValidation(), viewModel);
 
-            return await _service.Login(viewModel);
+            return await _service.LoginAsync(viewModel);
         }
 
         // PUT api/users/update
@@ -90,7 +90,7 @@ namespace RapidPay.Api.Controllers
         {
             ValidationHelper.Validate(new UpdateUserValidation(), viewModel);
 
-            return await _service.Update(UserId, viewModel);
+            return await _service.UpdateAsync(UserId, viewModel);
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using System.Text;
 
 namespace RapidPay.Application.Utils
 {
@@ -7,6 +8,7 @@ namespace RapidPay.Application.Utils
         private const int SaltSize = 16;
         private const int KeySize = 32;
         private const int Iterations = 10000;
+        private static readonly string EncryptionKey = "M1k34o13m4#$%#";
 
         public static string Hash(string password)
         {
@@ -39,6 +41,30 @@ namespace RapidPay.Application.Utils
 
                 return verified;
             }
+        }
+
+        public static string Encrypt(string plainText)
+        {
+            using var aes = Aes.Create();
+            aes.Key = Encoding.UTF8.GetBytes(EncryptionKey.PadRight(32).Substring(0, 32));
+            aes.IV = new byte[16];
+
+            using var encryptor = aes.CreateEncryptor();
+            var plainBytes = Encoding.UTF8.GetBytes(plainText);
+            var encrypted = encryptor.TransformFinalBlock(plainBytes, 0, plainBytes.Length);
+            return Convert.ToBase64String(encrypted);
+        }
+
+        public static string Decrypt(string encryptedText)
+        {
+            using var aes = Aes.Create();
+            aes.Key = Encoding.UTF8.GetBytes(EncryptionKey.PadRight(32).Substring(0, 32));
+            aes.IV = new byte[16];
+
+            using var decryptor = aes.CreateDecryptor();
+            var encryptedBytes = Convert.FromBase64String(encryptedText);
+            var decrypted = decryptor.TransformFinalBlock(encryptedBytes, 0, encryptedBytes.Length);
+            return Encoding.UTF8.GetString(decrypted);
         }
     }
 }

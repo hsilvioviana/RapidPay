@@ -23,23 +23,23 @@ namespace RapidPay.Services.Services
             _mapper = mapper;
         }
 
-        public async Task<AuthenticationViewModel> SignUp(SignUpViewModel viewModel)
+        public async Task<AuthenticationViewModel> SignUpAsync(SignUpViewModel viewModel)
         {
             var model = _mapper.Map<UserModel>(viewModel);
 
-            var checkUsername = await _repository.SearchByUsername(model.Username);
+            var checkUsername = await _repository.SearchByUsernameAsync(model.Username);
 
             ValidationHelper.ThrowErrorWhen(checkUsername, "NotEqual", null, new InvalidInputException(ErrorMessages.Authentication.UsernameAlreadyInUse));
 
-            var checkEmail = await _repository.SearchByEmail(model.Email);
+            var checkEmail = await _repository.SearchByEmailAsync(model.Email);
 
             ValidationHelper.ThrowErrorWhen(checkEmail, "NotEqual", null, new InvalidInputException(ErrorMessages.Authentication.EmailAlreadyInUse));
 
             model.Password = Security.Hash(model.Password);
-            model.CreatedAt = DateTime.Now;
-            model.UpdatedAt = DateTime.Now;
+            model.CreatedAt = DateTime.UtcNow;
+            model.UpdatedAt = DateTime.UtcNow;
 
-            await _repository.Create(model);
+            await _repository.CreateAsync(model);
 
             return new AuthenticationViewModel()
             {
@@ -49,11 +49,11 @@ namespace RapidPay.Services.Services
             };
         }
 
-        public async Task<AuthenticationViewModel> Login(LoginViewModel viewModel)
+        public async Task<AuthenticationViewModel> LoginAsync(LoginViewModel viewModel)
         {
             var requestUser = _mapper.Map<UserModel>(viewModel);
 
-            var user = await _repository.SearchByUsername(requestUser.Username);
+            var user = await _repository.SearchByUsernameAsync(requestUser.Username);
 
             ValidationHelper.ThrowErrorWhen(user, "Equal", null, new EntityNotFoundException(ErrorMessages.Authentication.UserNotFound));
 
@@ -69,18 +69,18 @@ namespace RapidPay.Services.Services
             };
         }
 
-        public async Task<AuthenticationViewModel> Update(Guid id, UpdateUserViewModel viewModel)
+        public async Task<AuthenticationViewModel> UpdateAsync(Guid id, UpdateUserViewModel viewModel)
         {
-            var user = await _repository.Find(id);
+            var user = await _repository.FindAsync(id);
 
             ValidationHelper.ThrowErrorWhen(user, "Equal", null, new EntityNotFoundException(ErrorMessages.Authentication.UserNotFound));
 
-            var checkUsername = await _repository.SearchByUsername(viewModel.Username);
+            var checkUsername = await _repository.SearchByUsernameAsync(viewModel.Username);
 
             if (checkUsername?.Id != user.Id)
                 ValidationHelper.ThrowErrorWhen(checkUsername, "NotEqual", null, new InvalidInputException(ErrorMessages.Authentication.UsernameAlreadyInUse));
 
-            var checkEmail = await _repository.SearchByEmail(viewModel.Email);
+            var checkEmail = await _repository.SearchByEmailAsync(viewModel.Email);
 
             if (checkEmail?.Id != user.Id)
                 ValidationHelper.ThrowErrorWhen(checkEmail, "NotEqual", null, new InvalidInputException(ErrorMessages.Authentication.EmailAlreadyInUse));
@@ -96,9 +96,9 @@ namespace RapidPay.Services.Services
 
             user.Username = viewModel.Username;
             user.Email = viewModel.Email;
-            user.UpdatedAt = DateTime.Now;
+            user.UpdatedAt = DateTime.UtcNow;
 
-            await _repository.Update(user);
+            await _repository.UpdateAsync(user);
 
             return new AuthenticationViewModel()
             {

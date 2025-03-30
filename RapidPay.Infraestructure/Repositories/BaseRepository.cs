@@ -15,43 +15,43 @@ namespace RapidPay.Infraestructure.Repositories
             DbSet = Db.Set<TModel>();
         }
 
-        public virtual async Task<List<TModel>> Search()
+        public virtual async Task<List<TModel>> SearchAsync()
         { 
             return await DbSet.AsNoTracking().ToListAsync();
         }
 
-        public virtual async Task<TModel> Find(Guid id)
+        public virtual async Task<TModel> FindAsync(Guid id)
         {
             return await DbSet.FindAsync(id);        
         }
 
-        public virtual async Task Create(TModel model)
+        public virtual async Task CreateAsync(TModel model)
         {
             DbSet.Add(model);
-            await SaveChanges();
+            await SaveChangesAsync();
         }
 
-        public virtual async Task CreateMany(List<TModel> models)
+        public virtual async Task CreateManyAsync(List<TModel> models)
         {
             DbSet.AddRange(models);
-            await SaveChanges();
+            await SaveChangesAsync();
         }
 
-        public virtual async Task Update(TModel model)
+        public virtual async Task UpdateAsync(TModel model)
         {
             Db.ChangeTracker.Clear();
             DbSet.Update(model);
-            await SaveChanges();
+            await SaveChangesAsync();
         }
 
-        public virtual async Task Delete(Guid id)
+        public virtual async Task DeleteAsync(Guid id)
         {
             Db.ChangeTracker.Clear();
             DbSet.Remove(new TModel { Id = id });
-            await SaveChanges();
+            await SaveChangesAsync();
         }
 
-        public async Task<int> SaveChanges()
+        public async Task<int> SaveChangesAsync()
         {
             return await Db.SaveChangesAsync();
         }

@@ -9,5 +9,12 @@
             public const string UserNotFound = "User not found.";
             public const string IncorrectPassword = "Incorrect password.";
         }
+
+        public static class Card
+        {
+            public const string AlreadyExists = "A card already exists for this user.";
+            public const string NotFound = "Card not found.";
+            public const string InsufficientBalance = "Insufficient balance.";
+        }
     }
 }

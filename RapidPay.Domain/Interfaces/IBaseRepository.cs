@@ -2,11 +2,11 @@ namespace RapidPay.Domain.Interfaces
 {
     public interface IBaseRepository<TModel> : IDisposable
     {
-        Task<List<TModel>> Search();
-        Task<TModel> Find(Guid id);        
-        Task Create(TModel model);
-        Task CreateMany(List<TModel> models);
-        Task Update(TModel model);
-        Task Delete(Guid id);
+        Task<List<TModel>> SearchAsync();
+        Task<TModel> FindAsync(Guid id);        
+        Task CreateAsync(TModel model);
+        Task CreateManyAsync(List<TModel> models);
+        Task UpdateAsync(TModel model);
+        Task DeleteAsync(Guid id);
     }
 }

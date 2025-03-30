@@ -14,12 +14,12 @@ namespace RapidPay.Infraestructure.Repositories
             _context = context;
         }
 
-        public async Task<UserModel> SearchByUsername(string username)
+        public async Task<UserModel> SearchByUsernameAsync(string username)
         {
             return await DbSet.Where(U => U.Username == username).FirstOrDefaultAsync();
         }
 
-        public async Task<UserModel> SearchByEmail(string email)
+        public async Task<UserModel> SearchByEmailAsync(string email)
         {
             return await DbSet.Where(U => U.Email == email).FirstOrDefaultAsync();
         }

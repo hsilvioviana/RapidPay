@@ -4,8 +4,8 @@ namespace RapidPay.Services.Interfaces
 {
     public interface IUserService
     {
-        Task<AuthenticationViewModel> SignUp(SignUpViewModel viewModel);
-        Task<AuthenticationViewModel> Login(LoginViewModel viewModel);
-        Task<AuthenticationViewModel> Update(Guid id, UpdateUserViewModel viewModel);
+        Task<AuthenticationViewModel> SignUpAsync(SignUpViewModel viewModel);
+        Task<AuthenticationViewModel> LoginAsync(LoginViewModel viewModel);
+        Task<AuthenticationViewModel> UpdateAsync(Guid id, UpdateUserViewModel viewModel);
     }
 }
