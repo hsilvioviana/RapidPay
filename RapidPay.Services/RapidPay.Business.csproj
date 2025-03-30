@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RapidPay.Application\RapidPay.Application.csproj" />
+    <ProjectReference Include="..\RapidPay.Infraestructure\RapidPay.Infraestructure.csproj" />
+  </ItemGroup>
+
+</Project>

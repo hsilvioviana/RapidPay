@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RapidPay.Api", "RapidPay.Api\RapidPay.Api.csproj", "{91A47B60-B993-44D1-BA90-B11C903EEF33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RapidPay.Domain", "RapidPay.Domain\RapidPay.Domain.csproj", "{01DA553E-3CE2-41F4-8BB1-952BFF9397D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RapidPay.Application", "RapidPay.Application\RapidPay.Application.csproj", "{D2A81C38-377F-49C1-BA4C-B04365E6B5DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RapidPay.CrossCutting", "RapidPay.CrossCutting\RapidPay.CrossCutting.csproj", "{AAD0592F-F435-4BA6-855A-9854D7C660B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RapidPay.Business", "RapidPay.Services\RapidPay.Business.csproj", "{6D4FA880-C9F4-46C3-9CB3-42755D9B587C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RapidPay.Infraestructure", "RapidPay.Infraestructure\RapidPay.Infraestructure.csproj", "{3E71F01A-529B-4A8E-B387-CBBC890B16E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RapidPay.UnitTests", "RapidPay.UnitTests\RapidPay.UnitTests.csproj", "{B7317700-33DC-4909-8279-5F0CE4924CBC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{91A47B60-B993-44D1-BA90-B11C903EEF33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91A47B60-B993-44D1-BA90-B11C903EEF33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91A47B60-B993-44D1-BA90-B11C903EEF33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91A47B60-B993-44D1-BA90-B11C903EEF33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01DA553E-3CE2-41F4-8BB1-952BFF9397D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01DA553E-3CE2-41F4-8BB1-952BFF9397D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01DA553E-3CE2-41F4-8BB1-952BFF9397D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01DA553E-3CE2-41F4-8BB1-952BFF9397D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2A81C38-377F-49C1-BA4C-B04365E6B5DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2A81C38-377F-49C1-BA4C-B04365E6B5DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2A81C38-377F-49C1-BA4C-B04365E6B5DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2A81C38-377F-49C1-BA4C-B04365E6B5DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAD0592F-F435-4BA6-855A-9854D7C660B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAD0592F-F435-4BA6-855A-9854D7C660B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAD0592F-F435-4BA6-855A-9854D7C660B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAD0592F-F435-4BA6-855A-9854D7C660B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D4FA880-C9F4-46C3-9CB3-42755D9B587C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D4FA880-C9F4-46C3-9CB3-42755D9B587C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D4FA880-C9F4-46C3-9CB3-42755D9B587C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D4FA880-C9F4-46C3-9CB3-42755D9B587C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E71F01A-529B-4A8E-B387-CBBC890B16E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E71F01A-529B-4A8E-B387-CBBC890B16E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E71F01A-529B-4A8E-B387-CBBC890B16E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E71F01A-529B-4A8E-B387-CBBC890B16E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7317700-33DC-4909-8279-5F0CE4924CBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7317700-33DC-4909-8279-5F0CE4924CBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7317700-33DC-4909-8279-5F0CE4924CBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7317700-33DC-4909-8279-5F0CE4924CBC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
