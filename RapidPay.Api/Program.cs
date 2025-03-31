@@ -110,6 +110,8 @@ builder.Services.AddAuthentication(x =>
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
+builder.Services.AddMemoryCache();
+
 var app = builder.Build();
 app.UseStaticFiles();
 

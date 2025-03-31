@@ -6,6 +6,7 @@ using RapidPay.Application.ViewModels;
 using RapidPay.Domain.Interfaces;
 using RapidPay.Domain.Models;
 using RapidPay.Services.Interfaces;
+using static RapidPay.Application.Validations.ValidationHelper;
 
 namespace RapidPay.Services.Services
 {
@@ -27,7 +28,7 @@ namespace RapidPay.Services.Services
         public async Task<CardViewModel> CreateCardAsync(Guid userId, CardCreateViewModel request)
         {
             var currentCard = await _repository.GetByUserIdAsync(userId);
-            ValidationHelper.ThrowErrorWhen(currentCard, "NotEqual", null, new InvalidInputException(ErrorMessages.Card.AlreadyExists));
+            ThrowErrorWhen(currentCard, ComparisonType.NotEqual, null, new InvalidInputException(ErrorMessages.Card.AlreadyExists));
 
             var number = GenerateCardNumber();
             var cvv = GenerateCVV();
@@ -63,7 +64,7 @@ namespace RapidPay.Services.Services
         public async Task<CardViewModel> GetCardAsync(Guid userId)
         {
             var card = await _repository.GetByUserIdAsync(userId);
-            ValidationHelper.ThrowErrorWhen(card, "Equal", null, new InvalidInputException(ErrorMessages.Card.NotFound));
+            ThrowErrorWhen(card, ComparisonType.Equal, null, new InvalidInputException(ErrorMessages.Card.NotFound));
 
             var number = Security.Decrypt(card.Number);
             var cvv = Security.Decrypt(card.CVV);
@@ -83,15 +84,14 @@ namespace RapidPay.Services.Services
         {
             var card = await _repository.GetByUserIdAsync(userId);
 
-            ValidationHelper.ThrowErrorWhen(card, "Equal", null, new InvalidInputException(ErrorMessages.Card.NotFound));
+            ThrowErrorWhen(card, ComparisonType.Equal, null, new InvalidInputException(ErrorMessages.Card.NotFound));
 
-            var fee = await _feeService.GetCurrentFee();
+            var fee = _feeService.GetCurrentFee();
             var total = amount + fee;
 
             var available = card.Balance + (card.CreditLimit ?? 0);
 
-            if (available < total)
-                throw new InvalidInputException(ErrorMessages.Card.InsufficientBalance);
+            ThrowErrorWhen(available < total, ComparisonType.Equal, true, new InvalidInputException(ErrorMessages.Card.InsufficientBalance));
 
             card.Balance -= total;
             await _repository.UpdateAsync(card);
@@ -102,7 +102,7 @@ namespace RapidPay.Services.Services
         public async Task UpdateCardAsync(Guid userId, CardUpdateViewModel request)
         {
             var card = await _repository.GetByUserIdAsync(userId);
-            ValidationHelper.ThrowErrorWhen(card, "Equal", null, new InvalidInputException(ErrorMessages.Card.NotFound));
+            ThrowErrorWhen(card, ComparisonType.Equal, null, new InvalidInputException(ErrorMessages.Card.NotFound));
 
             if (request.Balance.HasValue && request.Balance.Value != card.Balance)
             {

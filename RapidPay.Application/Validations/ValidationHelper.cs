@@ -5,6 +5,12 @@ namespace RapidPay.Application.Validations
 {
     public static class ValidationHelper
     {
+        public enum ComparisonType
+        {
+            Equal,
+            NotEqual
+        }
+
         public static void Validate<TV, TM>(TV validation, TM model) where TV : AbstractValidator<TM>
         {
             var result = validation.Validate(model);
@@ -15,18 +21,14 @@ namespace RapidPay.Application.Validations
             }
         }
 
-        public static void ThrowErrorWhen<T, E>(T value1, string TypeOfComparison, T value2, E exception) where E : Exception
+        public static void ThrowErrorWhen<T, E>(T value1, ComparisonType comparison, T value2, E exception) where E : Exception
         {
-            var throwError = false;
-
-            if (TypeOfComparison == "Equal")
+            bool throwError = comparison switch
             {
-                throwError = EqualityComparer<T>.Default.Equals(value1, value2);
-            }
-            else if (TypeOfComparison == "NotEqual")
-            {
-                throwError = !EqualityComparer<T>.Default.Equals(value1, value2);
-            }
+                ComparisonType.Equal => Equals(value1, value2),
+                ComparisonType.NotEqual => !Equals(value1, value2),
+                _ => false
+            };
 
             if (throwError)
             {

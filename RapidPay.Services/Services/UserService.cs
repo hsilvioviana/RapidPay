@@ -7,6 +7,7 @@ using RapidPay.Application.Validations;
 using RapidPay.Application.ViewModels;
 using Microsoft.Extensions.Configuration;
 using RapidPay.Application.CustomExceptions;
+using static RapidPay.Application.Validations.ValidationHelper;
 
 namespace RapidPay.Services.Services
 {
@@ -29,11 +30,11 @@ namespace RapidPay.Services.Services
 
             var checkUsername = await _repository.SearchByUsernameAsync(model.Username);
 
-            ValidationHelper.ThrowErrorWhen(checkUsername, "NotEqual", null, new InvalidInputException(ErrorMessages.Authentication.UsernameAlreadyInUse));
+            ThrowErrorWhen(checkUsername, ComparisonType.NotEqual, null, new InvalidInputException(ErrorMessages.Authentication.UsernameAlreadyInUse));
 
             var checkEmail = await _repository.SearchByEmailAsync(model.Email);
 
-            ValidationHelper.ThrowErrorWhen(checkEmail, "NotEqual", null, new InvalidInputException(ErrorMessages.Authentication.EmailAlreadyInUse));
+            ThrowErrorWhen(checkEmail, ComparisonType.NotEqual, null, new InvalidInputException(ErrorMessages.Authentication.EmailAlreadyInUse));
 
             model.Password = Security.Hash(model.Password);
             model.CreatedAt = DateTime.UtcNow;
@@ -55,11 +56,11 @@ namespace RapidPay.Services.Services
 
             var user = await _repository.SearchByUsernameAsync(requestUser.Username);
 
-            ValidationHelper.ThrowErrorWhen(user, "Equal", null, new EntityNotFoundException(ErrorMessages.Authentication.UserNotFound));
+            ThrowErrorWhen(user, ComparisonType.Equal, null, new EntityNotFoundException(ErrorMessages.Authentication.UserNotFound));
 
             var correctPassword = Security.Check(user.Password, requestUser.Password);
 
-            ValidationHelper.ThrowErrorWhen(correctPassword, "Equal", false, new InvalidInputException(ErrorMessages.Authentication.IncorrectPassword));
+            ThrowErrorWhen(correctPassword,ComparisonType.Equal, false, new InvalidInputException(ErrorMessages.Authentication.IncorrectPassword));
 
             return new AuthenticationViewModel()
             {
@@ -73,23 +74,23 @@ namespace RapidPay.Services.Services
         {
             var user = await _repository.FindAsync(id);
 
-            ValidationHelper.ThrowErrorWhen(user, "Equal", null, new EntityNotFoundException(ErrorMessages.Authentication.UserNotFound));
+            ThrowErrorWhen(user,ComparisonType.Equal, null, new EntityNotFoundException(ErrorMessages.Authentication.UserNotFound));
 
             var checkUsername = await _repository.SearchByUsernameAsync(viewModel.Username);
 
             if (checkUsername?.Id != user.Id)
-                ValidationHelper.ThrowErrorWhen(checkUsername, "NotEqual", null, new InvalidInputException(ErrorMessages.Authentication.UsernameAlreadyInUse));
+                ThrowErrorWhen(checkUsername, ComparisonType.NotEqual, null, new InvalidInputException(ErrorMessages.Authentication.UsernameAlreadyInUse));
 
             var checkEmail = await _repository.SearchByEmailAsync(viewModel.Email);
 
             if (checkEmail?.Id != user.Id)
-                ValidationHelper.ThrowErrorWhen(checkEmail, "NotEqual", null, new InvalidInputException(ErrorMessages.Authentication.EmailAlreadyInUse));
+                ThrowErrorWhen(checkEmail, ComparisonType.NotEqual, null, new InvalidInputException(ErrorMessages.Authentication.EmailAlreadyInUse));
 
             if (!string.IsNullOrEmpty(viewModel.Password) && !string.IsNullOrEmpty(viewModel.NewPassword))
             {
                 var correctPassword = Security.Check(user.Password, viewModel.Password);
 
-                ValidationHelper.ThrowErrorWhen(correctPassword, "Equal", false, new InvalidInputException(ErrorMessages.Authentication.IncorrectPassword));
+                ThrowErrorWhen(correctPassword, ComparisonType.Equal, false, new InvalidInputException(ErrorMessages.Authentication.IncorrectPassword));
 
                 user.Password = Security.Hash(viewModel.NewPassword);
             }
